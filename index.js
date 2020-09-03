@@ -1,6 +1,6 @@
 const { Engine, Render, Runner, World, Bodies } = Matter;
 
-const cells = 5;
+const cells = 3;
 const width = 600;
 const height = 600;
 
@@ -33,4 +33,27 @@ World.add(world, walls);
 const grid = Array(cells).fill(null).map(() => Array(cells).fill(false));
 const verticals = Array(cells).fill(null).map(() => Array(cells - 1).fill(false));
 const horizontals = Array(cells - 1).fill(null).map(() => Array(cells).fill(false));
-console.log(horizontals);
+
+const startRow = Math.floor(Math.random() * cells);
+const startColumn = Math.floor(Math.random() * cells);
+
+const stepThroughCell = (row, column) => {
+    // Si j'ai déjà parcouru la cellule ([row][column])
+    if (grid[row][column]) {
+        return;
+    }
+
+    // marquer cette cellule comme visité
+    grid[row][column] = true;
+
+    // recherch aléatoire des différents voisin
+    const neighbors = [
+        [row - 1, column],
+        [row, column + 1],
+        [row + 1, column],
+        [row, column - 1]
+    ];
+};
+
+stepThroughCell(startRow, startColumn);
+console.log(grid);
